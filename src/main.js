@@ -1,5 +1,7 @@
 import {getImagesByQuery} from './js/pixabay-api.js';
 import {createGallery, clearGallery, showLoader, hideLoader } from './js/render-functions.js';
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 
 const form = document.querySelector(".form");
@@ -13,7 +15,12 @@ function handlerSubmit(event) {
     event.preventDefault();
     const query = input.value.trim();
     if(query === "") {
-        alert("Введіть Ваш запит")
+        iziToast.show({
+        title: 'Ой, що це коїться???',
+        message: 'Sorry, there are no images matching your search query. Please try again!',
+        color: 'red',
+        position: 'topRight',
+    });
         return;
     } 
     clearGallery();
